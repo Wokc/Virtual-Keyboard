@@ -4,7 +4,7 @@ let main = document.createElement('main');
 main.className = 'keyboard';
 mainElem.appendChild(main);
 
-let inputElem = document.createElement('input');
+let inputElem = document.createElement('textarea');
 inputElem.className = 'input';
 inputElem.type = 'text';
 inputElem.autofocus = 'autofocus';
@@ -56,7 +56,7 @@ let keysArr = [
     '-',
     '=',
     'Backspace',
-    'tab',
+    'Tab',
     'q',
     'w',
     'e',
@@ -124,19 +124,62 @@ for (let i = 0; i < keysArr.length; i++) {
 
 function addclass(but) {
     inputElem.focus();
-    inputElem.value += but.id;
+    if (
+        but.id != 'Backspace' &&
+        but.id != 'Tab' &&
+        but.id != 'del' &&
+        but.id != 'Win' &&
+        but.id != 'caps' &&
+        but.id != 'Enter' &&
+        but.id != 'shift' &&
+        but.id != 'Ctrl' &&
+        but.id != 'Alt' &&
+        but.id != '↑' &&
+        but.id != '←' &&
+        but.id != '→' &&
+        but.id != '↓'
+    ) {
+        inputElem.value += but.id;
+    } else if (but.id == 'Tab') {
+        inputElem.value += '\t';
+    } else if (but.id == 'Backspace') {
+        inputElem.value = inputElem.value.slice(0, -1);
+    } else if (but.id == 'del') {
+        let nowPos = inputElem.selectionStart;
+        inputElem.value =
+            inputElem.value.substring(0, inputElem.selectionStart) +
+            inputElem.value.substring(inputElem.selectionEnd + 1, inputElem.value.length);
+        inputElem.selectionStart = nowPos;
+        inputElem.selectionEnd = nowPos;
+    } else if (but.id == 'Enter') {
+        inputElem.value =
+            inputElem.value.substring(0, inputElem.selectionStart) +
+            '\n' +
+            inputElem.value.substring(inputElem.selectionEnd, inputElem.value.length);
+    }
     console.log(but);
     but.classList.toggle('active');
     but.classList.toggle('active');
 }
 
-document.addEventListener('keydown', () => keydown(event.key));
-document.addEventListener('keyup', () => keydown(event.key));
+document.addEventListener('keydown', () => keydown(event, event.key));
+document.addEventListener('keyup', () => keyup(event, event.key));
 
-function keydown(but) {
+function keydown(event, but) {
+    console.log(but);
+
     inputElem.focus();
-    document.getElementById(but).classList.toggle('active');
+    if (document.getElementById(but).id == 'Tab') {
+        event.preventDefault();
+        inputElem.value += '\t';
+        document.getElementById(but).classList.toggle('active');
+    } else {
+        document.getElementById(but).classList.toggle('active');
+    }
 }
 
+function keyup(event, but) {
+    document.getElementById(but).classList.toggle('active');
+}
 // button.addEventListener('keydown', () => addclass(button));
 // button.addEventListener('keyup ', () => addclass(button));

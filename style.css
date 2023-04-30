@@ -42,7 +42,7 @@
     cursor: pointer;
 }
 
-.row1 div:first-child,
+/* .row1 div:first-child,
 .row1 div:last-child,
 .row2 div:first-child,
 .row2 div:last-child,
@@ -52,7 +52,7 @@
 .row4 div:last-child,
 .row5 .button {
     background-color: black;
-}
+} */
 
 .row1 div:last-child,
 .row3 div:first-child,
@@ -83,7 +83,7 @@
     background-color: green;
 }
 .active {
-    background-color: green !important;
+    background-color: green;
 }
 
 @media (max-width: 768px) {
