@@ -35,7 +35,23 @@ function newKey(name, keyClassName) {
     let button = document.createElement('div');
     button.innerText = name;
     button.className = `button`;
-    button.id = name;
+    button.id = name.toLowerCase();
+    if (
+        name == 'Backspace' ||
+        name == 'Tab' ||
+        name == 'del' ||
+        name == 'CapsLock' ||
+        name == 'Enter' ||
+        name == 'shift' ||
+        name == 'Ctrl' ||
+        name == 'Alt' ||
+        name == '↑' ||
+        name == '←' ||
+        name == '→' ||
+        name == '↓'
+    ) {
+        button.classList.add('special');
+    }
     keyClassName.appendChild(button);
 
     button.addEventListener('click', () => addclass(button));
@@ -70,8 +86,8 @@ let keysArr = [
     '[',
     ']',
     '\\',
-    'del',
-    'caps',
+    'delete',
+    'CapsLock',
     'a',
     's',
     'd',
@@ -123,26 +139,31 @@ for (let i = 0; i < keysArr.length; i++) {
 }
 
 function addclass(but) {
+    console.log();
     inputElem.focus();
     if (
-        but.id != 'Backspace' &&
-        but.id != 'Tab' &&
+        but.id != 'backspace' &&
+        but.id != 'tab' &&
         but.id != 'del' &&
-        but.id != 'Win' &&
-        but.id != 'caps' &&
-        but.id != 'Enter' &&
+        but.id != 'win' &&
+        but.id != 'capslock' &&
+        but.id != 'enter' &&
         but.id != 'shift' &&
-        but.id != 'Ctrl' &&
-        but.id != 'Alt' &&
+        but.id != 'ctrl' &&
+        but.id != 'alt' &&
         but.id != '↑' &&
         but.id != '←' &&
         but.id != '→' &&
         but.id != '↓'
     ) {
-        inputElem.value += but.id;
-    } else if (but.id == 'Tab') {
+        if (event.getModifierState('CapsLock')) {
+            inputElem.value += but.id.toUpperCase();
+        } else {
+            inputElem.value += but.id;
+        }
+    } else if (but.id == 'tab') {
         inputElem.value += '\t';
-    } else if (but.id == 'Backspace') {
+    } else if (but.id == 'backspace') {
         inputElem.value = inputElem.value.slice(0, -1);
     } else if (but.id == 'del') {
         let nowPos = inputElem.selectionStart;
@@ -151,11 +172,16 @@ function addclass(but) {
             inputElem.value.substring(inputElem.selectionEnd + 1, inputElem.value.length);
         inputElem.selectionStart = nowPos;
         inputElem.selectionEnd = nowPos;
-    } else if (but.id == 'Enter') {
+    } else if (but.id == 'enter') {
         inputElem.value =
             inputElem.value.substring(0, inputElem.selectionStart) +
             '\n' +
             inputElem.value.substring(inputElem.selectionEnd, inputElem.value.length);
+        // } else if (but.id == 'CapsLock') {
+        //     inputElem.value =
+        //         inputElem.value.substring(0, inputElem.selectionStart) +
+        //         '\n' +
+        //         inputElem.value.substring(inputElem.selectionEnd, inputElem.value.length);
     }
     console.log(but);
     but.classList.toggle('active');
@@ -167,19 +193,30 @@ document.addEventListener('keyup', () => keyup(event, event.key));
 
 function keydown(event, but) {
     console.log(but);
+    but = but.toLowerCase();
+    let buttton = document.getElementById(but);
+    console.log(buttton.classList.contains('special'));
+    if (event.getModifierState('CapsLock') && buttton.classList.contains('special') == false) {
+        but = but.toLowerCase();
+    }
 
     inputElem.focus();
-    if (document.getElementById(but).id == 'Tab') {
+    if (document.getElementById(but).id == 'tab') {
         event.preventDefault();
         inputElem.value += '\t';
-        document.getElementById(but).classList.toggle('active');
+        document.getElementById(but).classList.add('active');
     } else {
-        document.getElementById(but).classList.toggle('active');
+        document.getElementById(but).classList.add('active');
     }
 }
 
 function keyup(event, but) {
-    document.getElementById(but).classList.toggle('active');
+    but = but.toLowerCase();
+    let buttton = document.getElementById(but);
+    if (event.getModifierState('CapsLock') && buttton.classList.contains('special') == false) {
+        but = but.toLowerCase();
+    }
+    document.getElementById(but).classList.remove('active');
 }
 // button.addEventListener('keydown', () => addclass(button));
 // button.addEventListener('keyup ', () => addclass(button));
