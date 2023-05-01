@@ -28,7 +28,7 @@
     margin: 5px;
     margin: 0 auto;
 }
-.button {
+.button-main {
     width: 40px;
     height: 40px;
     background-color: gray;
@@ -40,8 +40,33 @@
     padding: 10px 10px;
     font-size: 18px;
     cursor: pointer;
+    position: relative;
 }
 
+/* .button {
+    width: 40px;
+    height: 40px;
+    background-color: gray;
+    color: white;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    margin: 10px 10px;
+    padding: 10px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+} */
+.switcher {
+    padding-bottom: 10px;
+}
+
+.altButton {
+    position: absolute;
+    left: 13px;
+    top: 3px;
+    font-size: 8px;
+}
 /* .row1 div:first-child,
 .row1 div:last-child,
 .row2 div:first-child,
@@ -74,12 +99,11 @@
     flex-grow: 1.2;
 }
 
-.row5 .button:nth-child(4) {
+.row5 .button-main:nth-child(4) {
     flex-grow: 20;
-    background-color: gray;
 }
 
-.button:active {
+.button-main:active {
     background-color: green;
 }
 .active {
@@ -90,7 +114,7 @@
     .keyboard {
         width: 60vw;
     }
-    .button {
+    .button-main {
         width: 19px;
         height: 19px;
 
