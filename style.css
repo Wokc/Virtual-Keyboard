@@ -1,0 +1,131 @@
+.main-wrapper {
+    margin: 0 auto;
+    padding: 0;
+    width: 100vw;
+}
+
+.keyboard {
+    width: 36vw;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+.input {
+    width: 100%;
+    height: 20vh;
+    margin: 100px auto;
+}
+
+.row1,
+.row2,
+.row3,
+.row4,
+.row5 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    margin: 0 auto;
+}
+.button-main {
+    width: 40px;
+    height: 40px;
+    background-color: gray;
+    color: white;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    margin: 10px 10px;
+    padding: 10px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* .button {
+    width: 40px;
+    height: 40px;
+    background-color: gray;
+    color: white;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    margin: 10px 10px;
+    padding: 10px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+} */
+.switcher {
+    padding-bottom: 10px;
+}
+
+.altButton {
+    position: absolute;
+    left: 13px;
+    top: 3px;
+    font-size: 8px;
+}
+/* .row1 div:first-child,
+.row1 div:last-child,
+.row2 div:first-child,
+.row2 div:last-child,
+.row3 div:first-child,
+.row3 div:last-child,
+.row4 div:first-child,
+.row4 div:last-child,
+.row5 .button {
+    background-color: black;
+} */
+
+.row1 div:last-child,
+.row3 div:first-child,
+.row3 div:last-child,
+.row4 div:first-child,
+.row4 div:first-child {
+    flex-grow: 2;
+}
+
+.row2 div:first-child {
+    flex-grow: 1.5;
+}
+
+.row4 div:first-child {
+    flex-grow: 0.5;
+}
+.row5 div:first-child,
+.row5 .button:nth-child(6) {
+    flex-grow: 1.2;
+}
+
+.row5 .button-main:nth-child(4) {
+    flex-grow: 20;
+}
+
+.button-main:active {
+    background-color: green;
+}
+.active {
+    background-color: green;
+}
+
+@media (max-width: 768px) {
+    .keyboard {
+        width: 60vw;
+    }
+    .button-main {
+        width: 19px;
+        height: 19px;
+
+        margin: 3px 3px;
+        padding: 3px 3px;
+        font-size: 8px;
+    }
+    .row4 .button:last-child {
+        font-size: 10px;
+    }
+    .active {
+        background-color: green;
+    }
+}
