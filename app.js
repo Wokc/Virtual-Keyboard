@@ -301,7 +301,7 @@ function newKey(name, keyClassName, keysArr) {
     keyClassName.appendChild(wrapper);
 
     let button = document.createElement('div');
-    console.log(keysArr);
+    // console.log(keysArr);
     // создание доп кнопок для шифта
 
     if (Array.isArray(name)) {
@@ -398,7 +398,19 @@ function createKeyboard() {
 }
 createKeyboard();
 //
-
+document.onkeydown = function (event) {
+    if (event.key == 'Shift') {
+        document.onkeyup = function (event) {
+            if (event.code) {
+                console.log(event.key);
+                console.log(but);
+                inputElem.value += but.nextSibling.textContent;
+            } else {
+                document.onkeyup = null;
+            }
+        };
+    }
+};
 let capsLockStatus;
 
 function addclass(but) {
@@ -408,7 +420,7 @@ function addclass(but) {
     // }
 
     // but = event.key;
-    console.log(but);
+    // console.log(but);
     if (capsLockStatus == undefined) {
         capsLockStatus = event.getModifierState('CapsLock');
     }
@@ -522,16 +534,16 @@ function addclass(but) {
 // }
 
 document.addEventListener('keydown', () => {
-    console.log(event.code, event.key);
+    // console.log(event.code, event.key);
     event.preventDefault();
 
     but = event.key;
-    console.log(but);
+    // console.log(but);
 
     but = document.getElementById(but.toLowerCase());
     if (but == null) {
         but = event.code;
-        console.log(but);
+        // console.log(but);
         but = document.getElementById(but.toLowerCase());
     }
     addclass(but);
@@ -565,4 +577,3 @@ function runOnKeys(func, ...args) {
 }
 
 runOnKeys(() => chageLang(lang), 'Control', 'Alt');
-runOnKeys(() => chageLang(lang), 'Shift', '');
